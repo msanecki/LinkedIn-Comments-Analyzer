@@ -80,9 +80,10 @@ def paragraph_cleaning(p):
 
 def get_likes(comment):
     # likes exists
-    likes = comment.find('button', class_="feed-base-comment-social-bar__likes-count Sans-13px-black-55% hoverable-link-text")
+    likes = comment.find('button', class_="comments-comment-social-bar__reactions-count t-12 t-black--light t-normal hoverable-link-text display-flex")
     if (likes):
-        return likes.span.string.split(" ")[0]
+        print("Like: ",likes.span.get_text().split()[0] )
+        return likes.span.get_text()
     return 0
 
 def get_replies(comment):
