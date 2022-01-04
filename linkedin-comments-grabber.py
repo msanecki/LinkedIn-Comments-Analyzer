@@ -60,8 +60,7 @@ def paragraph_cleaning(p):
         return p.string.replace('\n','').strip()
 
 #    # mention comment
-#    elif (p.span and p.span.a):
-#        return p.span.a.string.replace('\n','').strip()
+#    elif (p.span and p.span.a):#        return p.span.a.string.replace('\n','').strip()
 #    elif (p.a.span):
 #        return p.a.span.string.replace('\n','').strip()
 #    # url comment
@@ -82,7 +81,6 @@ def get_likes(comment):
     # likes exists
     likes = comment.find('button', class_="comments-comment-social-bar__reactions-count t-12 t-black--light t-normal hoverable-link-text display-flex")
     if (likes):
-        print("Like: ",likes.span.get_text().split()[0] )
         return likes.span.get_text()
     return 0
 
@@ -93,6 +91,37 @@ def get_replies(comment):
         return replies.span.string.split(" ")[0]
     return 0
 
+def get_cleanLinkedInId(arg):
+    if(arg):
+        return "FakeName"
+    else:
+        return arg.a.attrs.get('href')
+
+def get_cleanLinkedInName(arg):
+    if(arg==None):
+        return "FakeName"
+    else:
+        if arg.find('span',class_="comments-post-meta__name-text hoverable-link-text") == None:
+            return "FakeName"
+        else:
+            return arg.find('span',class_="comments-post-meta__name-text hoverable-link-text").string.replace('\n','').strip()
+def get_cleanLinkedInPhoto(arg):
+    if(arg==None):
+        return "FakeName"
+    else:
+        if arg.img == None:
+            return "FakeNum"
+        else:
+            return arg.img.attrs.get('src')
+
+def get_cleanLinkedInComment(arg):
+    if(arg==None):
+        return "FakeName"
+    else:
+        if arg.find('div', class_='feed-shared-text relative') == None:
+            return "FakeName"
+        else:   
+            return arg.find('div', class_='feed-shared-text relative').find('span').get_text().replace('\n','').strip()
 i = 0
 # Fill Dataframe with comments and replies
 def add_comment(parent, comment):
@@ -101,13 +130,11 @@ def add_comment(parent, comment):
         [
             i + 1, 
             parent, 
-            comment.a.attrs.get('href'), 
-            comment.find('span', 
-                class_="comments-post-meta__name-text hoverable-link-text").
-                string.replace('\n','').strip(), 
-            comment.img.attrs.get('src'),
+            get_cleanLinkedInId(comment), 
+            get_cleanLinkedInName(comment), 
+            get_cleanLinkedInPhoto(comment),
             #paragraph_cleaning(comment.find("span", dir_="ltr")), 
-            comment.find('div', class_='feed-shared-text relative').find('span').get_text().replace('\n','').strip(),
+            get_cleanLinkedInComment(comment),
             get_likes(comment), 
             get_replies(comment)
         ]
