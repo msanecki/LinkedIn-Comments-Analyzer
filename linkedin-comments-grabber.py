@@ -46,7 +46,7 @@ file.close()
 soup = BeautifulSoup(html_doc, 'html.parser')
 
 # Select all comments and replies html tags
-comments = soup.div.find_all("article", recursive=False)
+comments = soup.find_all("article", recursive=True)
 
 # Prepare Dataframe for loading all comments and replies inside it
 output_comments_df = pd.DataFrame(columns=['CommentID', 'ParentID', 'LinkedIn ID', 'Name', 'Photo', 
