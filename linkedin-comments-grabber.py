@@ -55,8 +55,9 @@ output_comments_df = pd.DataFrame(columns=['CommentID', 'ParentID', 'LinkedIn ID
 # Data Cleansing Phase
 def paragraph_cleaning(p):
     # Normal Comment
-    if (p.span and p.span.span):
-        return p.span.span.string.replace('\n','').strip()
+    print("comment: ", p)
+    if (p):
+        return p.string.replace('\n','').strip()
 
 #    # mention comment
 #    elif (p.span and p.span.a):
@@ -69,13 +70,13 @@ def paragraph_cleaning(p):
 #    return p
         
     # Complicated Comment
-    p_body = ""
-    for cmnt in p.children:
-        if (cmnt.string):
-            p_body = p_body + cmnt.string
-        else:
-            p_body = p_body + " " + cmnt.a.string
-    return p_body
+  #  p_body = ""
+   # for cmnt in p.children:
+    #    if (cmnt.string):
+     #       p_body = p_body + cmnt.string
+      #  else:
+       #     p_body = p_body + " " + cmnt.a.string
+    #return p_body
 
 def get_likes(comment):
     # likes exists
@@ -104,7 +105,8 @@ def add_comment(parent, comment):
                 class_="comments-post-meta__name-text hoverable-link-text").
                 string.replace('\n','').strip(), 
             comment.img.attrs.get('src'),
-            paragraph_cleaning(comment.find('p')), 
+            #paragraph_cleaning(comment.find("span", dir_="ltr")), 
+            comment.find('div', class_='feed-shared-text relative').find('span').get_text().replace('\n','').strip(),
             get_likes(comment), 
             get_replies(comment)
         ]
