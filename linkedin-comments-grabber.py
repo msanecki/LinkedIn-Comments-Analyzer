@@ -101,7 +101,7 @@ def add_comment(parent, comment):
             parent, 
             comment.a.attrs.get('href'), 
             comment.find('span', 
-                class_="feed-base-comment-item__name Sans-13px-black-70%-semibold").
+                class_="comments-post-meta__name-text hoverable-link-text").
                 string.replace('\n','').strip(), 
             comment.img.attrs.get('src'),
             paragraph_cleaning(comment.find('p')), 
