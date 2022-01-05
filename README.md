@@ -26,6 +26,8 @@ Extracting LinkedIn comments from any post and export it to Excel file
 
 7- Excute linkedin-comments-grabber.py
 
+8- test effort was very little, try&error approach may help in case your analysis of your structure causes problems
+
 <img src="Sample - Blurred.png" />
 
 # TODOs:
