@@ -92,17 +92,20 @@ def get_replies(comment):
     return 0
 
 def get_cleanLinkedInId(arg):
-    if(arg):
-        return "FakeName"
+    if(arg==None):
+        return "FakeLinkedInID"
     else:
-        return arg.a.attrs.get('href')
+        if arg.a == None:
+            return "FakeLinkedInID"
+        else:
+            return arg.a.attrs.get('href')
 
 def get_cleanLinkedInName(arg):
     if(arg==None):
         return "FakeName"
     else:
         if arg.find('span',class_="comments-post-meta__name-text hoverable-link-text") == None:
-            return "FakeName"
+            return "FakeLinkedInName"
         else:
             return arg.find('span',class_="comments-post-meta__name-text hoverable-link-text").string.replace('\n','').strip()
 def get_cleanLinkedInPhoto(arg):
