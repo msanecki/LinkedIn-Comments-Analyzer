@@ -27,3 +27,8 @@ Extracting LinkedIn comments from any post and export it to Excel file
 7- Excute linkedin-comments-grabber.py
 
 <img src="Sample - Blurred.png" />
+
+# TODOs:
+Having the list of commnets extracted can be a good start point for text statistic analysis like (no of words used in the communication)
+1. Use some lib to analyze text - statistic
+2. Try to understand the comminication, meaning, key messages/words - to get in social listening mode 
