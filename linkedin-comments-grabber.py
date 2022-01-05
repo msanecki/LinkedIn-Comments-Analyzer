@@ -36,9 +36,10 @@ Enjoy Data Science :)
 
 import pandas as pd
 from bs4 import BeautifulSoup
+from datetime import date
 
 # the file which contains all comments
-file = open('Comments.html', 'r',encoding='utf8')
+file = open('Comments_Tesla.html', 'r',encoding='utf8')
 html_doc = file.read()
 file.close()
 
@@ -162,6 +163,7 @@ output_comments_df['Likes'] = output_comments_df['Likes'].astype(int)
 output_comments_df['Replies'] = output_comments_df['Replies'].astype(int)
 
 # Exporting to Excel file
-writer = pd.ExcelWriter('output.xlsx')
+date_stamp = date.today().strftime('%Y-%m-%d')
+writer = pd.ExcelWriter('output_'+date_stamp + '.xlsx')
 output_comments_df.to_excel(writer,'Sheet1')
 writer.save()
