@@ -1,4 +1,4 @@
-# LinkedIn Comment Analyzer
+# LinkedIn Comment Analyzer - adjusted a bit to get processing (brute force approach)
 
 Extracting LinkedIn comments from any post and export it to Excel file
 
